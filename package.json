@@ -1,0 +1,39 @@
+{
+  "name": "ocr-pdf-araci",
+  "version": "1.0.0",
+  "description": "Kurulum gerektirmeyen, internetsiz OCR ve PDF aracı",
+  "main": "main.js",
+  "author": "OCR PDF Araci",
+  "scripts": {
+    "hazirla": "node scripts/prepare.js",
+    "start": "npm run hazirla && electron .",
+    "dist": "npm run hazirla && electron-builder --publish never"
+  },
+  "devDependencies": {
+    "electron": "33.2.1",
+    "electron-builder": "25.1.8",
+    "tesseract.js": "5.1.1",
+    "tesseract.js-core": "5.1.1",
+    "@tesseract.js-data/tur": "*",
+    "@tesseract.js-data/eng": "*",
+    "pdfjs-dist": "3.11.174",
+    "pdf-lib": "1.17.1",
+    "@pdf-lib/fontkit": "1.1.1",
+    "jszip": "3.10.1"
+  },
+  "build": {
+    "appId": "com.ocrpdf.araci",
+    "productName": "OCR PDF Araci",
+    "files": ["main.js", "server.js", "app/**/*"],
+    "directories": { "output": "dist" },
+    "win": {
+      "target": [{ "target": "portable", "arch": ["x64"] }],
+      "artifactName": "OCR-PDF-Araci-Windows.${ext}"
+    },
+    "mac": {
+      "target": [{ "target": "zip", "arch": ["x64", "arm64"] }],
+      "category": "public.app-category.productivity",
+      "artifactName": "OCR-PDF-Araci-Mac-${arch}.${ext}"
+    }
+  }
+}
